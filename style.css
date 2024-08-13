@@ -1,0 +1,97 @@
+:root {
+    --blue-color: rgb(97, 87, 255);
+    --orange-color: rgb(252, 102, 102);
+    --purple-color: rgb(153,51,255);
+    --green-color: rgb(103, 186, 39);
+    --yellow-color: rgba(237, 224, 49, 0.997);
+    --lightblue-color: rgba(0, 204, 255, 0.832);
+    --darkpink-color: rgb(215, 66, 196);
+    --darkgrey-color: rgb(62, 62, 62);
+    --pink-color: rgb(255,70,175);
+}
+
+* {
+    box-sizing: border-box;
+    background-color: black;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-family: "Honk", system-ui;
+    font-size: 3rem;
+    margin: 1rem auto;
+}
+
+main {
+    margin: 1.5rem .5rem;
+}
+
+.gif-card {
+    max-width: 30%;
+    overflow: hidden;
+}
+
+.figcaption {
+    color: white;
+    margin: 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+button {
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#searchText {
+    background-color: var(--yellow-color);
+    color: var(--purple-color);
+    width: 300px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#searchBtn {
+    background-color: var(--orange-color);
+}
+
+#cleanBtn {
+    background-color: var(--darkgrey-color);
+}
+
+#save {
+    background-color: var(--green-color);
+}
+
+#update {
+    background-color: var(--lightblue-color);
+}
+
+#remove {
+    background-color: var(--purple-color);
+}
+
+.d-none {
+    display: none;
+}
+
+.triple {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    margin-bottom: 2rem;
+}
