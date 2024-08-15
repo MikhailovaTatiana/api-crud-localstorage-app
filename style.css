@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Honk&display=swap');
+
 :root {
     --blue-color: rgb(97, 87, 255);
     --orange-color: rgb(252, 102, 102);
@@ -73,20 +75,16 @@ button {
     background-color: var(--darkgrey-color);
 }
 
-#save {
+.save {
     background-color: var(--green-color);
 }
 
-#update {
+.update {
     background-color: var(--lightblue-color);
 }
 
-#remove {
+.remove {
     background-color: var(--purple-color);
-}
-
-.d-none {
-    display: none;
 }
 
 .triple {
@@ -94,4 +92,35 @@ button {
     justify-content: space-around;
     text-align: center;
     margin-bottom: 2rem;
+}
+
+.saved-gifs {
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 3rem;
+    column-gap: 2rem;
+    margin: 2rem;
+
+    div {
+        max-width: 30%;
+        overflow: hidden;
+
+        article {
+            display: flex;
+            flex-direction: column;
+
+            img {
+                height: 200px;
+                width: max-content;
+                align-self: center;
+            }
+
+            aside {
+                align-self: center;
+                display: flex;
+            }
+        }
+    }
 }

@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', setup());
 function setup() {
     searchGifs();
     cleanHomePage();
+    chooseGif();
 }
 
 function searchGifs() {
@@ -23,11 +24,13 @@ function fetchGiphyApi(url) {
     fetch(url)
         .then(response => response.json())
         .then(content => {
-
-            console.log(content.data);
+            let gifs = content.data;
+            console.log(gifs);
             console.log('META', content.meta);
-
-            insertGifs(content.data);
+            if (gifs.length !== 0) {
+                insertGifs(gifs);
+            } else console.log('META message:', content.meta.msg);
+            
         })
         .catch(error => console.log(error));
 }
@@ -44,17 +47,41 @@ function insertGifs(gifs) {
 }
 
 function createGifTemplate(gif) {
+    let image = gif.images.fixed_height.url;
+    let title = gif.title;
+    let id = gif.id;
     return `
         <article class="gif-card">
-            <img src="${gif.images.fixed_height.url}" alt="${gif.title}">
-            <p class="figcaption">${gif.title || 'no title'}</p>
-            <button id="save">Save gif</button>
-            <button id="update" class="d-none">Udate title</button>
-            <button id="remove" class="d-none">Remove gif</button>
+            <img src="${image}" alt="${title}">
+            <p class="figcaption">${title || 'no title'}</p>
+            <button class="save" data-id="${id}" data-image="${image}" data-title="${title}">Save gif</button>
         </article>
     `;
 }
 
 function cleanHomePage() {
     document.querySelector('#cleanBtn').addEventListener('click', () => window.location.reload());
+}
+
+function chooseGif() {
+    document.querySelector('.output').addEventListener('click', e => {
+        if (e.target.classList.contains('save')) {
+            let gifId = e.target.dataset.id;
+            let gifImage = e.target.dataset.image;
+            let gifTitle = e.target.dataset.title;
+            saveGif(gifId, gifImage, gifTitle);
+        }
+    });
+}
+
+function saveGif(gifId, gifImage, gifTitle) {
+    let myGifs = JSON.parse(localStorage.getItem('myGifs')) || [];
+    let isExists = myGifs.some(gif => gif.id === gifId);
+    if (!isExists) {
+        myGifs.push({id: gifId, image: gifImage, title: gifTitle});
+        localStorage.setItem('myGifs', JSON.stringify(myGifs));
+        alert(`A gif with id ${gifId} is saved in the local storage.`);
+    } else {
+        alert(`There is already a gif with id ${gifId} in the local storage.`);
+    }
 }
