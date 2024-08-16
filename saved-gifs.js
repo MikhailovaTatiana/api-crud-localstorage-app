@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () =>{
     displayMyGifs();
     removeGif();
+    removeAll();
 });
 
 function displayMyGifs() {
@@ -47,4 +48,11 @@ function submitRemoveGif(id) {
     myGifs = myGifs.filter(gif => gif.id !== id);
     localStorage.setItem('myGifs', JSON.stringify(myGifs));
     location.reload();
+}
+
+function removeAll() {
+    document.querySelector('#removeAll').addEventListener('click', () => {
+        localStorage.clear();
+        location.reload();
+    })
 }

@@ -70,6 +70,7 @@ button {
     padding: 0 5px;
     border-radius: 5px;
     font-size: 17px;
+    font-family: Arial;
 }
 
 #searchText {
@@ -84,7 +85,8 @@ button {
     background-color: var(--orange-color);
 }
 
-#cleanBtn {
+#cleanBtn,
+#removeAll {
     background-color: var(--darkgrey-color);
 }
 
