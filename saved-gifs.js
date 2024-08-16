@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () =>{
     displayMyGifs();
+    removeGif();
 });
 
 function displayMyGifs() {
@@ -30,4 +31,20 @@ function createSavedCard(gif) {
             </aside>
         </article>
     `;
+}
+
+function removeGif() {
+    document.querySelector('.saved-gifs').addEventListener('click', e => {
+        if (e.target.classList.contains('remove')) {
+            let gifId = e.target.dataset.id;
+            submitRemoveGif(gifId);
+        }
+    });
+}
+
+function submitRemoveGif(id) {
+    let myGifs = JSON.parse(localStorage.getItem('myGifs')) || [];
+    myGifs = myGifs.filter(gif => gif.id !== id);
+    localStorage.setItem('myGifs', JSON.stringify(myGifs));
+    location.reload();
 }
