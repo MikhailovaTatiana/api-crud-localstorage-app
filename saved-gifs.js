@@ -2,15 +2,13 @@ document.addEventListener('DOMContentLoaded', () =>{
     displayMyGifs();
     removeGif();
     removeAll();
+    updateTitle();
 });
 
 function displayMyGifs() {
     let myGifs = JSON.parse(localStorage.getItem('myGifs'));
-    console.log(myGifs);
 
     let outputRef = document.querySelector('.saved-gifs');
-    console.log(outputRef);
-
     myGifs.forEach(gif => {
         let card = document.createElement('div');
         card.innerHTML = createSavedCard(gif);
@@ -27,7 +25,7 @@ function createSavedCard(gif) {
             <img src="${image}" alt="${title}">
             <p class="figcaption">${title || 'no title'}</p>
             <aside>
-                <button class="update">Udate title</button>
+                <button class="update" data-title="${title}" data-id="${id}" data-image="${image}">Update title</button>
                 <button class="remove" data-id="${id}">Remove gif</button>
             </aside>
         </article>
@@ -38,6 +36,7 @@ function removeGif() {
     document.querySelector('.saved-gifs').addEventListener('click', e => {
         if (e.target.classList.contains('remove')) {
             let gifId = e.target.dataset.id;
+            alert(`The gif with id ${gifId} is removing...`);
             submitRemoveGif(gifId);
         }
     });
@@ -55,4 +54,28 @@ function removeAll() {
         localStorage.clear();
         location.reload();
     })
+}
+
+function updateTitle() {
+    document.querySelector('.saved-gifs').addEventListener('click', e => {
+        if (e.target.classList.contains('update')) {
+            let gifTitle = e.target.dataset.title;
+            let gifId = e.target.dataset.id;
+            let gifImage = e.target.dataset.image;
+            let myGifs = JSON.parse(localStorage.getItem('myGifs')) || [];
+            if (myGifs.length > 0) {
+                let input = prompt('Update the title', `${gifTitle}`);
+                let newList = [];
+                myGifs.forEach(gif => {
+                    if (gif.id === gifId) {
+                        newList.push({id: gifId, image: gifImage, title: input});
+                    } else {
+                        newList.push(gif);
+                    }   
+                })
+                localStorage.setItem('myGifs', JSON.stringify(newList));
+                location.reload();   
+            }
+        }
+    });
 }
