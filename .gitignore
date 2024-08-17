@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+## Hidden API_KEY
+hidden_key.js
+
 # User-specific files
 *.rsuser
 *.suo
